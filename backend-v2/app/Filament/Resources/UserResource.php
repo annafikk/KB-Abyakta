@@ -19,7 +19,12 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Users';
+    }
 
     public static function form(Form $form): Form
     {
@@ -37,6 +42,7 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('email')->sortable()->searchable(),
+                TextColumn::make('roles.name'),
                 TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([

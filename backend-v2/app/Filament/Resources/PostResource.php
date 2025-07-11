@@ -19,6 +19,8 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
+
 
 class PostResource extends Resource
 {
@@ -50,13 +52,15 @@ class PostResource extends Resource
                 FileUpload::make('thumbnail')
                     ->label('Gambar')
                     ->image()
-                    ->directory('thumbnails')
-                    ->maxSize(2048),
+                    ->directory('thumbnails'),
 
-                Textarea::make('content')
+                TinyEditor::make('content')
                     ->label('Isi Berita')
-                    ->required()
-                    ->rows(10),
+                    ->fileAttachmentsDisk('public') // storage lokal
+                    ->fileAttachmentsVisibility('public') // supaya bisa diakses lewat URL
+                    ->fileAttachmentsDirectory('uploads') // gambar disimpan di storage/app/public/uploads
+                    ->profile('full')
+                    ->required(),
             ]);
     }
 
@@ -67,6 +71,10 @@ class PostResource extends Resource
                 TextColumn::make('title')->limit(40)->sortable()->searchable(),
                 TextColumn::make('category.name')->label('Kategori')->sortable(),
                 ImageColumn::make('thumbnail'),
+                TextColumn::make('content_preview')
+                    ->label('Isi Singkat')
+                    ->limit(100),
+
                 TextColumn::make('created_at')->label('Tanggal')->dateTime(),
             ])
             ->filters([
