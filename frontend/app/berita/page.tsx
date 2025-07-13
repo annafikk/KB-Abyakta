@@ -1,4 +1,5 @@
 import { getTopHeadlines } from "@/lib/newsapi";
+import { getCategories, Category } from "@/lib/getCategories";
 
 export default async function Berita() {
     const articles = await getTopHeadlines();
