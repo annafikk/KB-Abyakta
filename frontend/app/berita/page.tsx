@@ -1,37 +1,53 @@
-import { getTopHeadlines } from "@/lib/newsapi";
-// import { getCategories, Category } from "@/lib/getCategories";
+import { getPosts, Post } from "@/lib/api";
+import PostCard from "@/components/PostCard";
 
-export default async function Berita() {
-    const articles = await getTopHeadlines();
+export default async function Beranda() {
+    const posts: Post[] = await getPosts();
+
+    const totalPosts = posts.length;
+
+    if (totalPosts === 0) {
+        return (
+            <section className="space-y-16">
+                <div className="text-sm text-gray-600">
+                    Menampilkan 0 - 0 of 0 Artikel
+                </div>
+
+                <div className="text-xl text-gray-800">
+                    Belum ada artikel.
+                </div>
+            </section>
+        );
+    }
+
+    const latestPosts = posts.slice(0, 6);
+    const startIndex = 1;
+    const endIndex = latestPosts.length;
 
     return (
-        <section className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Berita Terkini (US)</h1>
-            <ul className="grid md:grid-cols-2 gap-6">
-                {articles.map((article, i) => (
-                    <li
-                        key={i}
-                        className="bg-white border rounded-lg p-4 shadow-sm hover:shadow-md transition"
-                    >
-                        <a href={article.url} target="_blank" rel="noopener noreferrer">
-                            {article.urlToImage && (
-                                <img
-                                    src={article.urlToImage}
-                                    alt={article.title}
-                                    className="w-full h-48 object-cover rounded mb-3"
-                                />
-                            )}
-                            <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                                {article.title}
-                            </h2>
-                            <p className="text-sm text-gray-600">
-                                {article.description || "Tidak ada deskripsi."}
-                            </p>
-                            <p className="text-xs text-gray-400 mt-2">{article.source.name}</p>
-                        </a>
-                    </li>
-                ))}
-            </ul>
+        <section className="space-y-16">
+            {/* 1 - n of n Artikel */}
+            <div className="text-sm text-gray-600">
+                Menampilkan {startIndex} - {endIndex} of {totalPosts} Artikel
+            </div>
+
+            {/* Berita Terbaru */}
+            <div className="space-y-6">
+                <h2 className="text-2xl font-semibold text-gray-800">Artikel Terbaru</h2>
+                <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {latestPosts.map((post) => (
+                        <li key={post.id}>
+                            <PostCard
+                                id={post.id}
+                                slug={post.slug}
+                                title={post.title}
+                                image={post.image}
+                                category={post.category}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </section>
     );
 }
