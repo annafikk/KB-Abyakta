@@ -7,12 +7,12 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/login',
-        destination: '/auth/login',
+        source: '/masuk',
+        destination: '/auth/masuk',
       },
       {
-        source: '/register',
-        destination: '/auth/register',
+        source: '/daftar',
+        destination: '/auth/daftar',
       },
     ]
   },

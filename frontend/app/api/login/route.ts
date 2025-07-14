@@ -18,6 +18,7 @@ export async function POST(request: Request) {
         const data = await res.json();
         return NextResponse.json(data);
     } catch (error) {
+        console.error("Login error:", error);
         return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 }

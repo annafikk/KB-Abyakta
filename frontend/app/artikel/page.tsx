@@ -1,16 +1,15 @@
-import { getPosts, Post } from "@/lib/api";
-import PostCard from "@/components/PostCard";
+import { getPosts } from "@/lib/api/posts";
+import PostCard from "@/components/artikel/PostCard";
 
 export default async function Beranda() {
-    const posts: Post[] = await getPosts();
-
+    const posts = await getPosts();
     const totalPosts = posts.length;
 
     if (totalPosts === 0) {
         return (
-            <section className="space-y-16">
+            <section className="space-y-8">
                 <div className="text-sm text-gray-600">
-                    Menampilkan 0 - 0 of 0 Artikel
+                    Menampilkan 0 - 0 dari 0 Artikel
                 </div>
 
                 <div className="text-xl text-gray-800">
@@ -25,15 +24,19 @@ export default async function Beranda() {
     const endIndex = latestPosts.length;
 
     return (
-        <section className="space-y-16">
-            {/* 1 - n of n Artikel */}
-            <div className="text-sm text-gray-600">
-                Menampilkan {startIndex} - {endIndex} of {totalPosts} Artikel
+        <section className="space-y-8">
+            {/* Info Jumlah Artikel */}
+            <div className="text-gray-600">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+                    Artikel Terbaru
+                </h2>
+                <p className="leading-relaxed">
+                    Menampilkan {startIndex} - {endIndex} dari {totalPosts} Artikel
+                </p>
             </div>
 
-            {/* Berita Terbaru */}
+            {/* Daftar Artikel Terbaru */}
             <div className="space-y-6">
-                <h2 className="text-2xl font-semibold text-gray-800">Artikel Terbaru</h2>
                 <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {latestPosts.map((post) => (
                         <li key={post.id}>

@@ -131,3 +131,7 @@
 .scrollbar-none {
   scrollbar-width: none;
 }
+
+button:focus {
+  outline: none;
+}

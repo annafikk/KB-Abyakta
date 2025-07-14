@@ -7,7 +7,7 @@ export default function LogoutButton() {
 
     function handleLogout() {
         document.cookie = "token=; path=/; max-age=0";
-        router.push("/login");
+        router.push("/masuk");
     }
 
     return (
@@ -15,7 +15,7 @@ export default function LogoutButton() {
             onClick={handleLogout}
             className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
         >
-            Logout
+            Keluar
         </button>
     );
 }
