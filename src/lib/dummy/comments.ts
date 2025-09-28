@@ -1,0 +1,42 @@
+export const komentarDummy = [
+    {
+        id: "1",
+        postId: "1",
+        userId: "2",
+        content: "Saya mencoba berkomentar!",
+        createdAt: new Date("2025-09-28T10:11:43.062Z"),
+        parentId: null,
+    },
+    {
+        id: "2",
+        postId: "1",
+        userId: "1",
+        content: "Saya membalas komentar!",
+        createdAt: new Date("2025-09-28T10:15:00.000Z"),
+        parentId: "1",
+    },
+    {
+        id: "3",
+        postId: "1",
+        userId: "2",
+        content: "Saya membalas komentar dari balasan komentar!",
+        createdAt: new Date("2025-09-28T10:20:00.000Z"),
+        parentId: "2",
+    },
+    {
+        id: "4",
+        postId: "1",
+        userId: "2",
+        content: "Saya mencoba berkomentar lagi!",
+        createdAt: new Date("2025-09-28T10:15:00.000Z"),
+        parentId: null,
+    },
+    {
+        id: "5",
+        postId: "2",
+        userId: "4",
+        content: "Komentar apabila userID tidak ditemukan!",
+        createdAt: new Date("2025-09-29T09:00:00.000Z"),
+        parentId: null,
+    },
+];
