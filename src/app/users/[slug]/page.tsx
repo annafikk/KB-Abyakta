@@ -8,8 +8,6 @@ import { userDummy } from "@/lib/dummy/users";
 import { postinganDummy } from "@/lib/dummy/posts";
 import { formatTanggal } from "@/lib/utils/formatTanggal";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
@@ -33,7 +31,7 @@ export default function UserDetailPage() {
     };
 
     return (
-        <section className="p-20">
+        <section className="p-6 md:p-20">
             <div className="mb-8 text-center">
                 <h1 className="text-3xl font-bold">{user.name}</h1>
                 <p className="text-muted-foreground">{user.email}</p>

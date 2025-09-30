@@ -5,8 +5,8 @@ import { kategoriDummy } from "@/lib/dummy/categories";
 
 export default function KategoriPage() {
     return (
-        <section className="px-20 py-16 container mx-auto">
-            <h1 className="text-3xl font-bold mb-8">Kategori</h1>
+        <section className="px-10 py-16 container mx-auto">
+            <h1 className="text-3xl font-bold mb-8 text-center">Kategori</h1>
             <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {kategoriDummy.map((cat) => (
                     <li

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +26,26 @@ const Navbar = () => {
         { title: "Tentang Kami", url: "/tentang-kami" },
     ];
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const checkLogin = () => {
+            const token = localStorage.getItem("token");
+            setIsLoggedIn(!!token);
+        };
+
+        // cek awal
+        checkLogin();
+
+        // dengarkan perubahan dari tab lain / localStorage
+        window.addEventListener("storage", checkLogin);
+
+        return () => {
+            window.removeEventListener("storage", checkLogin);
+        };
+    }, []);
+
+
     return (
         <section className="border-b bg-white sticky top-0 z-50">
             <div className="container max-w-7xl mx-auto px-6 md:px-8">
@@ -34,7 +55,7 @@ const Navbar = () => {
                     <div className="flex items-center gap-10">
                         <Link href="/" className="flex items-center gap-2">
                             <Image
-                                src="/logo-abyakta.svg"
+                                src="/logo.svg"
                                 alt="Logo Abyakta"
                                 width={36}
                                 height={36}
@@ -59,13 +80,18 @@ const Navbar = () => {
                         </NavigationMenu>
                     </div>
 
-                    {/* Search */}
+                    {/* Auth Button */}
                     <div>
-                        <Link href="/masuk">
-                            <Button size="sm">Masuk</Button>
-                        </Link>
+                        {isLoggedIn ? (
+                            <Link href="/dashboard">
+                                <Button size="sm">Dashboard</Button>
+                            </Link>
+                        ) : (
+                            <Link href="/masuk">
+                                <Button size="sm">Masuk</Button>
+                            </Link>
+                        )}
                     </div>
-
                 </nav>
 
                 {/* Mobile */}
@@ -73,7 +99,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
                         <Image
-                            src="/logo-abyakta.svg"
+                            src="/logo.svg"
                             alt="Logo Abyakta"
                             width={32}
                             height={32}
@@ -93,7 +119,7 @@ const Navbar = () => {
                                 <SheetTitle>
                                     <Link href="/" className="flex items-center gap-2">
                                         <Image
-                                            src="/logo-abyakta.svg"
+                                            src="/logo.svg"
                                             alt="Logo Abyakta"
                                             width={28}
                                             height={28}
@@ -115,11 +141,20 @@ const Navbar = () => {
                                 ))}
 
                                 <div className="mt-4">
-                                    <Link href="/masuk" className="w-full">
-                                        <Button size="sm" className="w-full">Masuk</Button>
-                                    </Link>
+                                    {isLoggedIn ? (
+                                        <Link href="/dashboard" className="w-full">
+                                            <Button size="sm" className="w-full">
+                                                Dashboard
+                                            </Button>
+                                        </Link>
+                                    ) : (
+                                        <Link href="/masuk" className="w-full">
+                                            <Button size="sm" className="w-full">
+                                                Masuk
+                                            </Button>
+                                        </Link>
+                                    )}
                                 </div>
-
                             </div>
                         </SheetContent>
                     </Sheet>

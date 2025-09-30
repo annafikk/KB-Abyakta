@@ -41,7 +41,7 @@ export default function KategoriDetailPage() {
     const filteredPosts = postinganDummy.filter((p) => p.categoryId === category.id);
 
     return (
-        <section className="p-20">
+        <section className="py-20">
             <div className="container mx-auto flex flex-col gap-16 lg:px-16">
                 {/* Heading kategori */}
                 <div className="text-center px-4">

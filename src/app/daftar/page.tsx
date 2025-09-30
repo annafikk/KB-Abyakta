@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 
 export default function Daftar() {
     return (
-        <section className="pt-20">
+        <section className="pt-40">
             <div className="flex flex-col items-center gap-6 lg:justify-start">
                 <div
                     className="min-w-sm border-muted bg-background flex w-full max-w-sm flex-col items-center gap-y-4 rounded-md border px-6 py-8 shadow-md"
@@ -38,7 +38,7 @@ export default function Daftar() {
                         required
                     />
                     <Button type="submit" className="w-full">
-                        Daftar
+                        <a href="/dashboard/maintenance">Daftar</a>
                     </Button>
                 </div>
 

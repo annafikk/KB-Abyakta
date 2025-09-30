@@ -18,11 +18,6 @@ import { postinganDummy } from "@/lib/dummy/posts";
 import { userDummy } from "@/lib/dummy/users";
 import { formatTanggal } from "@/lib/utils/formatTanggal";
 
-const getUserName = (userId: string) => {
-    const user = userDummy.find((u) => u.id === userId);
-    return user ? user.name : "Tidak Diketahui";
-};
-
 const Blog = () => {
     const [visibleCount, setVisibleCount] = useState(6);
 
@@ -30,8 +25,13 @@ const Blog = () => {
         setVisibleCount((prev) => prev + 6);
     };
 
+    const getUserName = (userId: string) => {
+        const user = userDummy.find((u) => u.id === userId);
+        return user ? user.name : "Tidak Diketahui";
+    };
+
     return (
-        <section className="p-20">
+        <section className="py-20">
             <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
                 {/* Heading */}
                 <div className="text-center px-4">
@@ -42,7 +42,7 @@ const Blog = () => {
                         Artikel Terbaru
                     </h2>
                     <p className="mb-8 text-muted-foreground md:text-base lg:max-w-2xl lg:text-lg">
-                        Kumpulan berita dan informasi terbaru dari Desa Abyakta.
+                        Kumpulan berita dan informasi terbaru dari Kampung KB Pinang Kencana.
                     </p>
                 </div>
 
@@ -57,7 +57,7 @@ const Blog = () => {
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.4, ease: "easeOut" }}
                             >
-                                <Card className="grid grid-rows-[auto_auto_1fr_auto] pt-0">
+                                <Card className="flex flex-col pt-0 min-h-[480px]">
                                     {/* Gambar */}
                                     <div className="aspect-[16/9] w-full relative">
                                         <a
@@ -133,6 +133,7 @@ const Blog = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
+
         </section>
     );
 };
